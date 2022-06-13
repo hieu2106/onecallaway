@@ -1,2 +1,0 @@
-# onecallaway
-project cháy nắng
