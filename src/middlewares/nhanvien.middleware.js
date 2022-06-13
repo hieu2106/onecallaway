@@ -1,4 +1,3 @@
-const { restProperty } = require('@babel/types');
 const { ErrorCodes } = require('../helpers/constants');
 const { responseWithError } = require('../helpers/response-messages');
 
@@ -7,7 +6,9 @@ function validateGetAll(req, res, next) {
 }
 
 function createNhanVienMiddleware(req, res, next) {
-    const { name, address, email, dob, phone, gender } = req.body;
+    const {
+        name, address, email, dob, phone, gender,
+    } = req.body;
     if (!name || !address || !email || !dob || !phone || !gender) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
@@ -33,7 +34,9 @@ function createNhanVienMiddleware(req, res, next) {
 
 function updateNhanvienMiddleware(req, res, next) {
     const { id } = req.params;
-    const { name, address, email, dob, phone, gender } = req.body;
+    const {
+        name, address, email, dob, phone, gender,
+    } = req.body;
     if (!id || !name || !address || !email || !dob || !phone || !gender) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)

@@ -13,7 +13,6 @@ const {
     updateNhanvienMiddleware,
     findNhanvienByIdMiddleware,
     deleteNhanvienByIdMiddleware,
-    findNhanvienByNameMiddleware,
 } = require('../middlewares/nhanvien.middleware');
 
 router.route('/').get(validateGetAll, getAllController);
