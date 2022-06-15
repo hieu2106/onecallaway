@@ -4,8 +4,8 @@ const { responseWithError } = require('../helpers/response-messages');
 const { NhanVien } = require('../models');
 
 async function getAllController(req, res) {
-    const dichvu = await NhanVien.findAll();
-    return res.json(dichvu);
+    const nhanvien = await NhanVien.findAll();
+    return res.json(nhanvien);
 }
 
 async function createNhanVienController(req, res) {
@@ -15,9 +15,7 @@ async function createNhanVienController(req, res) {
 
 async function updateNhanVienController(req, res) {
     const { id } = req.params;
-    const {
-        name, address, email, dob, phone, gender,
-    } = req.body;
+    const { name, address, email, dob, phone, gender } = req.body;
     const nhanvien = await NhanVien.findOne({
         where: { id },
     });

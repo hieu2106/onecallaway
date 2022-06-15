@@ -2,7 +2,11 @@ const sequelize = require('../config/database');
 const { hashPassword } = require('../services/taikhoan.service');
 const NhanVien = require('./nhanvien.model');
 const TaiKhoan = require('./taikhoan.model');
-
+const DichVu = require('./dichvu.model');
+const KhachHang = require('./khachhang.model');
+const HDDichVu = require('./hddichvu.model');
+const DichVuSD = require('./dichvusudung.model');
+const Phong = require('./phong.model');
 NhanVien.hasOne(TaiKhoan);
 TaiKhoan.belongsTo(NhanVien);
 
@@ -32,4 +36,12 @@ async function synchronize() {
 }
 synchronize();
 
-module.exports = { NhanVien, TaiKhoan };
+module.exports = {
+    NhanVien,
+    TaiKhoan,
+    DichVu,
+    KhachHang,
+    HDDichVu,
+    DichVuSD,
+    Phong,
+};

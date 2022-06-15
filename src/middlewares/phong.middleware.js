@@ -5,9 +5,9 @@ function validateGetAll(req, res, next) {
     return next();
 }
 
-function createNhanVienMiddleware(req, res, next) {
-    const { name, address, email, dob, phone, gender } = req.body;
-    if (!name || !address || !email || !dob || !phone || !gender) {
+function createPhongMiddleware(req, res, next) {
+    const { maphong, dientich, dongia, loaiphong } = req.body;
+    if (!maphong || !dientich || !dongia || !loaiphong) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -17,23 +17,13 @@ function createNhanVienMiddleware(req, res, next) {
                 ),
             );
     }
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) === false) {
-        return res
-            .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
-            .send(
-                responseWithError(
-                    ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
-                    'Invalid email',
-                ),
-            );
-    }
     return next();
 }
 
-function updateNhanvienMiddleware(req, res, next) {
+function updatePhongMiddleware(req, res, next) {
     const { id } = req.params;
-    const { name, address, email, dob, phone, gender } = req.body;
-    if (!id || !name || !address || !email || !dob || !phone || !gender) {
+    const { maphong, dientich, dongia, loaiphong } = req.body;
+    if (!id || !maphong || !dientich || !dongia || !loaiphong) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -47,7 +37,7 @@ function updateNhanvienMiddleware(req, res, next) {
     return next();
 }
 
-function findNhanvienByIdMiddleware(req, res, next) {
+function findPhongByIdMiddleware(req, res, next) {
     const { id } = req.params;
     if (!id) {
         return res
@@ -62,7 +52,7 @@ function findNhanvienByIdMiddleware(req, res, next) {
     return next();
 }
 
-function deleteNhanvienByIdMiddleware(req, res, next) {
+function deletePhongByIdMiddleware(req, res, next) {
     const { id } = req.params;
     if (!id) {
         return res
@@ -77,9 +67,9 @@ function deleteNhanvienByIdMiddleware(req, res, next) {
     return next();
 }
 
-function findNhanvienByNameMiddleware(req, res, next) {
-    const { name } = req.query;
-    if (!name) {
+function findPhongByNameMiddleware(req, res, next) {
+    const { maphong } = req.query;
+    if (!maphong) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -93,9 +83,9 @@ function findNhanvienByNameMiddleware(req, res, next) {
 }
 module.exports = {
     validateGetAll,
-    createNhanVienMiddleware,
-    updateNhanvienMiddleware,
-    findNhanvienByIdMiddleware,
-    deleteNhanvienByIdMiddleware,
-    findNhanvienByNameMiddleware,
+    createPhongMiddleware,
+    updatePhongMiddleware,
+    findPhongByIdMiddleware,
+    deletePhongByIdMiddleware,
+    findPhongByNameMiddleware,
 };
