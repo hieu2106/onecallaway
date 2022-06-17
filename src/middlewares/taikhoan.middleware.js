@@ -3,6 +3,10 @@ const { responseWithError } = require('../helpers/response-messages');
 const { TaiKhoan } = require('../models');
 const { decodeToken } = require('../services/taikhoan.service');
 
+function validateGetAll(req, res, next) {
+    return next();
+}
+
 function loginMiddleware(req, res, next) {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -102,6 +106,7 @@ function changePasswordMiddleware(req, res, next) {
 }
 
 module.exports = {
+    validateGetAll,
     loginMiddleware,
     refreshTokenMiddleware,
     authMiddleware,

@@ -7,6 +7,9 @@ const KhachHang = require('./khachhang.model');
 const HDDichVu = require('./hddichvu.model');
 const DichVuSD = require('./dichvusudung.model');
 const Phong = require('./phong.model');
+const TienNghi = require('./tiennghi.model');
+const TienNghiPhong = require('./tiennghiphong.model');
+
 NhanVien.hasOne(TaiKhoan);
 TaiKhoan.belongsTo(NhanVien);
 
@@ -44,4 +47,6 @@ module.exports = {
     HDDichVu,
     DichVuSD,
     Phong,
+    TienNghi,
+    TienNghiPhong,
 };

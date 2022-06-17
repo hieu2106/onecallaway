@@ -127,8 +127,15 @@ async function changePasswordController(req, res) {
         .send(responseSuccess({}, 'Password changed'));
 }
 
+async function getAllController(req, res) {
+    const taikhoan = await TaiKhoan.findAll();
+    return res.json(taikhoan);
+}
+
+
 module.exports = {
     loginController,
     refreshTokenController,
     changePasswordController,
+    getAllController,
 };
