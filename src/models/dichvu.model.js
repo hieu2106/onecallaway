@@ -17,7 +17,6 @@ const DichVu = sequelize.define(
         tendv: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
         },
         dongia: {
             type: DataTypes.INTEGER,

@@ -5,7 +5,7 @@ const taikhoanRouter = require('./taikhoan.routes');
 const dichvuRouter = require('./dichvu.routes');
 const khachhangRouter = require('./khachhang.routes');
 const phongRouter = require('./phong.routes');
-
+const dichvusdRouter = require('./dichvusudung.routes');
 const router = Router();
 
 router.use('/status', (req, res) => {
@@ -18,5 +18,5 @@ router.use('/nhanvien', authMiddleware, nhanvienRouter);
 router.use('/dichvu', dichvuRouter);
 router.use('/khachhang', khachhangRouter);
 router.use('/phong', phongRouter);
-
+router.use('/dichvusd', dichvusdRouter);
 module.exports = router;

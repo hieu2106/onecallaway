@@ -14,16 +14,20 @@ const HDDichVu = sequelize.define(
             allowNull: false,
             unique: true,
         },
-        dongia: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        luongsd: {
-            type: DataTypes.INTEGER,
+        makh: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
         ngaylap: {
             type: DataTypes.DATE,
+        },
+        manv: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        tongtien: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
         },
     },
     {
