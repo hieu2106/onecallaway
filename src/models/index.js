@@ -28,6 +28,12 @@ PhongThue.belongsTo(PhieuTra);
 Phong.hasMany(PhongThue);
 PhongThue.belongsTo(Phong);
 
+NhanVien.hasMany(PhieuThue);
+PhieuThue.belongsTo(NhanVien);
+
+KhachHang.hasMany(PhieuThue);
+PhieuThue.belongsTo(KhachHang);
+
 async function synchronize() {
     await sequelize.sync();
     const rootUser = await NhanVien.findOne({

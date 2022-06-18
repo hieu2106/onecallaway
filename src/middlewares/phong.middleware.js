@@ -6,9 +6,7 @@ function validateGetAll(req, res, next) {
 }
 
 function createPhongMiddleware(req, res, next) {
-    const {
-        maphong, dientich, dongia, loaiphong,
-    } = req.body;
+    const { maphong, dientich, dongia, loaiphong } = req.body;
     if (!maphong || !dientich || !dongia || !loaiphong) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
@@ -24,9 +22,7 @@ function createPhongMiddleware(req, res, next) {
 
 function updatePhongMiddleware(req, res, next) {
     const { id } = req.params;
-    const {
-        maphong, dientich, dongia, loaiphong,
-    } = req.body;
+    const { maphong, dientich, dongia, loaiphong } = req.body;
     if (!id || !maphong || !dientich || !dongia || !loaiphong) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
@@ -85,6 +81,42 @@ function findPhongByNameMiddleware(req, res, next) {
     }
     return next();
 }
+
+function thuePhongMiddleware(req, res, next) {
+    const { makh, phongs, tiencoc } = req.body;
+    if (!makh || !phongs || !tiencoc) {
+        return res
+            .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
+            .send(
+                responseWithError(
+                    ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
+                    'Invalid arguments',
+                ),
+            );
+    }
+    if (!Array.isArray(phongs) || phongs.length === 0) {
+        return res
+            .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
+            .send(
+                responseWithError(
+                    ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
+                    'Cần có ít nhất 1 phòng',
+                ),
+            );
+    }
+    if (/^[0-9][0-9]+$/.test(tiencoc) === false) {
+        return res
+            .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
+            .send(
+                responseWithError(
+                    ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
+                    'Tiền cọc phải là số nguyên',
+                ),
+            );
+    }
+    return next();
+}
+
 module.exports = {
     validateGetAll,
     createPhongMiddleware,
@@ -92,4 +124,5 @@ module.exports = {
     findPhongByIdMiddleware,
     deletePhongByIdMiddleware,
     findPhongByNameMiddleware,
+    thuePhongMiddleware,
 };

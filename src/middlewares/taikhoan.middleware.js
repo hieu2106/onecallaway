@@ -1,6 +1,6 @@
 const { ErrorCodes } = require('../helpers/constants');
 const { responseWithError } = require('../helpers/response-messages');
-const { TaiKhoan } = require('../models');
+const { TaiKhoan, NhanVien } = require('../models');
 const { decodeToken } = require('../services/taikhoan.service');
 
 function validateGetAll(req, res, next) {
@@ -54,8 +54,11 @@ async function authMiddleware(req, res, next) {
         const decoded = decodeToken(accessToken, process.env.JWT_AT_SECRET);
         const { username, userId } = decoded;
         const taikhoan = await TaiKhoan.findOne({
-            username,
-            id: userId,
+            where: {
+                username,
+                id: userId,
+            },
+            include: NhanVien,
         });
         if (!taikhoan) {
             return res
@@ -67,6 +70,7 @@ async function authMiddleware(req, res, next) {
                     ),
                 );
         }
+        req.user = taikhoan;
     } catch (error) {
         return res
             .status(ErrorCodes.ERROR_CODE_UNAUTHORIZED)

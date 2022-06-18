@@ -9,20 +9,8 @@ const PhieuThue = sequelize.define(
             primaryKey: true,
             type: DataTypes.INTEGER,
         },
-        manv: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        makh: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        ngayden: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-        ngaydenhan: {
-            type: DataTypes.DATE,
+        tiencoc: {
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
     },

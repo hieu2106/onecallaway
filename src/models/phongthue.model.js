@@ -13,10 +13,14 @@ const PhongThue = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        giacoc: {
-            type: DataTypes.INTEGER,
+        ngayden: {
+            type: DataTypes.DATE,
             allowNull: false,
-        }
+        },
+        ngaydenhan: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
     },
     {
         charset: 'utf8mb4',

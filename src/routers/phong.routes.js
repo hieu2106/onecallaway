@@ -6,6 +6,8 @@ const {
     findPhongbyIDController,
     deletePhongbyIDController,
     findPhongByNameController,
+    getPhongTrongController,
+    thuePhongController,
 } = require('../controllers/phong.controller');
 const {
     validateGetAll,
@@ -13,6 +15,7 @@ const {
     updatePhongMiddleware,
     findPhongByIdMiddleware,
     deletePhongByIdMiddleware,
+    thuePhongMiddleware,
 } = require('../middlewares/phong.middleware');
 
 router.route('/').get(validateGetAll, getAllController);
@@ -21,9 +24,13 @@ router.route('/').post(createPhongMiddleware, createPhongController);
 
 router.route('/:id').patch(updatePhongMiddleware, updatePhongController);
 
+router.route('/trong').get(getPhongTrongController);
+
 router.route('/search').get(findPhongByNameController);
 
 router.route('/:id').get(findPhongByIdMiddleware, findPhongbyIDController);
+
+router.route('/thuephong').post(thuePhongMiddleware, thuePhongController);
 
 router
     .route('/:id')
