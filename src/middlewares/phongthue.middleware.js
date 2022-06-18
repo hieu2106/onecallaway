@@ -5,11 +5,11 @@ function validateGetAll(req, res, next) {
     return next();
 }
 
-function createDichVuMiddleware(req, res, next) {
+function createPhongThueMiddleware(req, res, next) {
     const {
-        madv, tendv, dongia, mota,
+        giathue, giacoc
     } = req.body;
-    if (!madv || !tendv || !dongia || !mota) {
+    if (!giathue || !giacoc) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -22,12 +22,12 @@ function createDichVuMiddleware(req, res, next) {
     return next();
 }
 
-function updateDichVuMiddleware(req, res, next) {
+function updatePhongThueMiddleware(req, res, next) {
     const { id } = req.params;
     const {
-        madv, tendv, dongia, mota,
+        giathue, giacoc
     } = req.body;
-    if (!id || !madv || !tendv || !dongia || !mota) {
+    if (!id || !giathue || !giacoc) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -41,7 +41,7 @@ function updateDichVuMiddleware(req, res, next) {
     return next();
 }
 
-function findDichVuByIdMiddleware(req, res, next) {
+function findPhongThueByIdMiddleware(req, res, next) {
     const { id } = req.params;
     if (!id) {
         return res
@@ -56,7 +56,7 @@ function findDichVuByIdMiddleware(req, res, next) {
     return next();
 }
 
-function deleteDichVuByIdMiddleware(req, res, next) {
+function deletePhongThueByIdMiddleware(req, res, next) {
     const { id } = req.params;
     if (!id) {
         return res
@@ -71,9 +71,9 @@ function deleteDichVuByIdMiddleware(req, res, next) {
     return next();
 }
 
-function findDichVuByNameMiddleware(req, res, next) {
-    const { tendv } = req.query;
-    if (!tendv) {
+function findPhongThueByNameMiddleware(req, res, next) {
+    const { id } = req.query;
+    if (!id) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -87,9 +87,9 @@ function findDichVuByNameMiddleware(req, res, next) {
 }
 module.exports = {
     validateGetAll,
-    createDichVuMiddleware,
-    updateDichVuMiddleware,
-    findDichVuByIdMiddleware,
-    deleteDichVuByIdMiddleware,
-    findDichVuByNameMiddleware,
+    createPhongThueMiddleware,
+    updatePhongThueMiddleware,
+    findPhongThueByIdMiddleware,
+    deletePhongThueByIdMiddleware,
+    findPhongThueByNameMiddleware,
 };
