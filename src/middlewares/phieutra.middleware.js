@@ -5,11 +5,11 @@ function validateGetAll(req, res, next) {
     return next();
 }
 
-function createDichVuMiddleware(req, res, next) {
+function createPhieuTraMiddleware(req, res, next) {
     const {
-        madv, tendv, dongia, mota,
+        ngaytra
     } = req.body;
-    if (!madv || !tendv || !dongia || !mota) {
+    if (!ngaytra) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -22,12 +22,12 @@ function createDichVuMiddleware(req, res, next) {
     return next();
 }
 
-function updateDichVuMiddleware(req, res, next) {
+function updatePhieuTraMiddleware(req, res, next) {
     const { id } = req.params;
     const {
-        madv, tendv, dongia, mota,
+        ngaytra
     } = req.body;
-    if (!id || !madv || !tendv || !dongia || !mota) {
+    if (!id || !ngaytra) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -41,7 +41,7 @@ function updateDichVuMiddleware(req, res, next) {
     return next();
 }
 
-function findDichVuByIdMiddleware(req, res, next) {
+function findPhieuTraByIdMiddleware(req, res, next) {
     const { id } = req.params;
     if (!id) {
         return res
@@ -56,7 +56,7 @@ function findDichVuByIdMiddleware(req, res, next) {
     return next();
 }
 
-function deleteDichVuByIdMiddleware(req, res, next) {
+function deletePhieuTraByIdMiddleware(req, res, next) {
     const { id } = req.params;
     if (!id) {
         return res
@@ -71,9 +71,9 @@ function deleteDichVuByIdMiddleware(req, res, next) {
     return next();
 }
 
-function findDichVuByNameMiddleware(req, res, next) {
-    const { tendv } = req.query;
-    if (!tendv) {
+function findPhieuTraByNameMiddleware(req, res, next) {
+    const { id } = req.query;
+    if (!id) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -87,9 +87,9 @@ function findDichVuByNameMiddleware(req, res, next) {
 }
 module.exports = {
     validateGetAll,
-    createDichVuMiddleware,
-    updateDichVuMiddleware,
-    findDichVuByIdMiddleware,
-    deleteDichVuByIdMiddleware,
-    findDichVuByNameMiddleware,
+    createPhieuTraMiddleware,
+    updatePhieuTraMiddleware,
+    findPhieuTraByIdMiddleware,
+    deletePhieuTraByIdMiddleware,
+    findPhieuTraByNameMiddleware,
 };

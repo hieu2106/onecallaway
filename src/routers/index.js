@@ -9,6 +9,9 @@ const dichvusdRouter = require('./dichvusudung.routes');
 const hddichvuRouter = require('./hddichvu.routes');
 const tiennghiRouter = require('./tiennghi.routes');
 const tiennghiphongRouter = require('./tiennghiphong.routes');
+const phieuthueRouter = require('./phieuthue.routes');
+const phieutraRouter = require('./phieutra.routes');
+const phongthueRouter = require('./phongthue.routes');
 
 const router = Router();
 
@@ -26,4 +29,8 @@ router.use('/dichvusd', dichvusdRouter);
 router.use('/hddichvu', hddichvuRouter);
 router.use('/tiennghi', tiennghiRouter);
 router.use('/tiennghiphong', tiennghiphongRouter);
+router.use('/phieuthue', phieuthueRouter);
+router.use('/phieutra', phieutraRouter);
+router.use('/phongthue', phongthueRouter);
+
 module.exports = router;
