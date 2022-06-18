@@ -81,8 +81,8 @@ async function authMiddleware(req, res, next) {
 }
 
 function changePasswordMiddleware(req, res, next) {
-    const { username, currentPassword, newPassword } = req.body;
-    if (!username || !currentPassword || !newPassword) {
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword || !newPassword) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(

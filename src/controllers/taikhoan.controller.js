@@ -94,37 +94,61 @@ async function refreshTokenController(req, res) {
 }
 
 async function changePasswordController(req, res) {
-    const { username, currentPassword, newPassword } = req.body;
-    const existed = await TaiKhoan.findOne({
-        where: {
-            username,
-        },
-    });
-    if (!existed) {
+    const accessToken = req.headers.authorization;
+    if (!accessToken) {
         return res
-            .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
+            .status(ErrorCodes.ERROR_CODE_UNAUTHORIZED)
             .send(
                 responseWithError(
-                    ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
-                    'User not found',
+                    ErrorCodes.ERROR_CODE_UNAUTHORIZED,
+                    'Invalid access token',
                 ),
             );
     }
-    if (!comparePassword(currentPassword, existed.password)) {
+    try {
+        const decoded = decodeToken(accessToken, process.env.JWT_AT_SECRET);
+        const existed = await TaiKhoan.findOne({
+            where: {
+                username: decoded.username,
+                id: decoded.userId,
+            },
+        });
+        if (!existed) {
+            return res
+                .status(ErrorCodes.ERROR_CODE_UNAUTHORIZED)
+                .send(
+                    responseWithError(
+                        ErrorCodes.ERROR_CODE_UNAUTHORIZED,
+                        'Invalid payload',
+                    ),
+                );
+        }
+        const { currentPassword, newPassword } = req.body;
+        if (!comparePassword(currentPassword, existed.password)) {
+            return res
+                .status(ErrorCodes.ERROR_CODE_UNAUTHORIZED)
+                .send(
+                    responseWithError(
+                        ErrorCodes.ERROR_CODE_UNAUTHORIZED,
+                        'Invalid current password',
+                    ),
+                );
+        }
+        existed.password = hashPassword(newPassword);
+        await existed.save();
+        return res.status(ErrorCodes.ERROR_CODE_SUCCESS).send({
+            message: 'Password changed successfully',
+        });
+    } catch (error) {
         return res
-            .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
+            .status(ErrorCodes.ERROR_CODE_UNAUTHORIZED)
             .send(
                 responseWithError(
-                    ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
-                    'Invalid password',
+                    ErrorCodes.ERROR_CODE_UNAUTHORIZED,
+                    'Invalid access token',
                 ),
             );
     }
-    existed.password = hashPassword(newPassword);
-    await existed.save();
-    return res
-        .status(ErrorCodes.ERROR_CODE_SUCCESS)
-        .send(responseSuccess({}, 'Password changed'));
 }
 
 async function getAllController(req, res) {
