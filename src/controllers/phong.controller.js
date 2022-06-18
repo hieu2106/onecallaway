@@ -58,6 +58,22 @@ async function updatePhongController(req, res) {
                 ),
             );
     }
+    const phongtt = await Phong.findOne({
+        where: {
+            maphong,
+        },
+    });
+
+    if (phongtt) {
+        return res
+            .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
+            .send(
+                responseWithError(
+                    ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
+                    'Phong da ton tai',
+                ),
+            );
+    }
     phong.maphong = maphong;
     phong.dientich = dientich;
     phong.dongia = dongia;

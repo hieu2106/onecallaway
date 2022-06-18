@@ -7,9 +7,9 @@ function validateGetAll(req, res, next) {
 
 function createDichVuSDMiddleware(req, res, next) {
     const {
-        mahddv, tendv, dongia, luongsd,
+        mahddv, madv, dongia, luongsd,
     } = req.body;
-    if (!mahddv || !tendv || !dongia || !luongsd) {
+    if (!mahddv || !madv || !dongia || !luongsd) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -25,9 +25,9 @@ function createDichVuSDMiddleware(req, res, next) {
 function updateDichVuSDMiddleware(req, res, next) {
     const { id } = req.params;
     const {
-        mahddv, tendv, dongia, luongsd,
+        mahddv, madv, dongia, luongsd,
     } = req.body;
-    if (!id || !mahddv || !tendv || !dongia || !luongsd) {
+    if (!id || !mahddv || !madv || !dongia || !luongsd) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -72,8 +72,8 @@ function deleteDichVuSDByIdMiddleware(req, res, next) {
 }
 
 function findDichVuSDByNameMiddleware(req, res, next) {
-    const { tendv } = req.query;
-    if (!tendv) {
+    const { madv } = req.query;
+    if (!madv) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(

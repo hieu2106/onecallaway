@@ -13,7 +13,7 @@ const DichVuSD = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        tendv: {
+        madv: {
             type: DataTypes.STRING,
             allowNull: false,
         },

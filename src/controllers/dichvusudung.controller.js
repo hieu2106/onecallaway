@@ -16,7 +16,7 @@ async function createDichVuSDController(req, res) {
 async function updateDichVuSDController(req, res) {
     const { id } = req.params;
     const {
-        madv, tendv, dongia, mota,
+        mahddv, madv, dongia, luongsd,
     } = req.body;
     const dichvusd = await DichVuSD.findOne({
         where: { id },
@@ -31,10 +31,10 @@ async function updateDichVuSDController(req, res) {
                 ),
             );
     }
+    dichvusd.mahddv = mahddv;
     dichvusd.madv = madv;
-    dichvusd.tendv = tendv;
     dichvusd.dongia = dongia;
-    dichvusd.mota = mota;
+    dichvusd.luongsd = luongsd;
 
     dichvusd.save();
     return res.json(dichvusd);
@@ -79,11 +79,11 @@ async function deleteDichVuSDbyIDController(req, res) {
 }
 
 async function findDichVuSDByNameController(req, res) {
-    const { tendv } = req.query;
+    const { madv } = req.query;
     const dichvusd = await DichVuSD.findAll({
         where: {
-            tendv: {
-                [Op.like]: `%${tendv}%`,
+            madv: {
+                [Op.like]: `%${madv}%`,
             },
         },
     });
