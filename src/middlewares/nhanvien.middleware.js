@@ -6,7 +6,9 @@ function validateGetAll(req, res, next) {
 }
 
 function createNhanVienMiddleware(req, res, next) {
-    const { name, address, email, dob, phone, gender } = req.body;
+    const {
+        name, address, email, dob, phone, gender,
+    } = req.body;
     if (!name || !address || !email || !dob || !phone || !gender) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
@@ -17,7 +19,7 @@ function createNhanVienMiddleware(req, res, next) {
                 ),
             );
     }
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) === false) {
+    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email) === false) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
@@ -32,7 +34,9 @@ function createNhanVienMiddleware(req, res, next) {
 
 function updateNhanvienMiddleware(req, res, next) {
     const { id } = req.params;
-    const { name, address, email, dob, phone, gender } = req.body;
+    const {
+        name, address, email, dob, phone, gender,
+    } = req.body;
     if (!id || !name || !address || !email || !dob || !phone || !gender) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)

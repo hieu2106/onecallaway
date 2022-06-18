@@ -132,7 +132,6 @@ async function getAllController(req, res) {
     return res.json(taikhoan);
 }
 
-
 module.exports = {
     loginController,
     refreshTokenController,

@@ -15,7 +15,9 @@ async function createTienNghiController(req, res) {
 
 async function updateTienNghiController(req, res) {
     const { id } = req.params;
-    const { matn, tentn, tinhtrang, slco } = req.body;
+    const {
+        matn, tentn, tinhtrang, slco,
+    } = req.body;
     const tiennghi = await TienNghi.findOne({
         where: { id },
     });

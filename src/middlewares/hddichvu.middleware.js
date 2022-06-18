@@ -6,7 +6,9 @@ function validateGetAll(req, res, next) {
 }
 
 function createHDDichVuMiddleware(req, res, next) {
-    const { mahddv, makh, manv, tongtien } = req.body;
+    const {
+        mahddv, makh, manv, tongtien,
+    } = req.body;
     if (!mahddv || !makh || !manv || !tongtien) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
@@ -22,7 +24,9 @@ function createHDDichVuMiddleware(req, res, next) {
 
 function updateHDDichVuMiddleware(req, res, next) {
     const { id } = req.params;
-    const { mahddv, makh, manv, tongtien } = req.body;
+    const {
+        mahddv, makh, manv, tongtien,
+    } = req.body;
     if (!id || !mahddv || !makh || !manv || !tongtien) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)

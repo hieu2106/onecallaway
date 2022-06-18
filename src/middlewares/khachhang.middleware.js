@@ -6,7 +6,9 @@ function validateGetAll(req, res, next) {
 }
 
 function createKhachHangMiddleware(req, res, next) {
-    const { makh, tenkh, diachi, dob, sdt, quoctich, gender } = req.body;
+    const {
+        makh, tenkh, diachi, dob, sdt, quoctich, gender,
+    } = req.body;
     if (!makh || !tenkh || !diachi || !dob || !sdt || !quoctich || !gender) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
@@ -17,31 +19,23 @@ function createKhachHangMiddleware(req, res, next) {
                 ),
             );
     }
-    // if (/dhajsdhsa/.test(email) === false) {
-    //     return res
-    //         .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
-    //         .send(
-    //             responseWithError(
-    //                 ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
-    //                 'Invalid email',
-    //             ),
-    //         );
-    // }
     return next();
 }
 
 function updateKhachHangMiddleware(req, res, next) {
     const { id } = req.params;
-    const { makh, tenkh, diachi, dob, sdt, quoctich, gender } = req.body;
+    const {
+        makh, tenkh, diachi, dob, sdt, quoctich, gender,
+    } = req.body;
     if (
-        !id ||
-        !makh ||
-        !tenkh ||
-        !diachi ||
-        !dob ||
-        !sdt ||
-        !quoctich ||
-        !gender
+        !id
+        || !makh
+        || !tenkh
+        || !diachi
+        || !dob
+        || !sdt
+        || !quoctich
+        || !gender
     ) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)

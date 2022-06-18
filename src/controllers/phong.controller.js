@@ -9,23 +9,36 @@ async function getAllController(req, res) {
 }
 
 async function createPhongController(req, res) {
-    const phong = await Phong.create(req.body);
-    return res.json(phong);
-    // const { maphong } = req.params;
-    // const phong = await Phong.findOne({
-    //     where: { maphong },
-    // });
-    // if (phong) {
-    //     console.log('Phòng này đã có trong danh sách');
-    // } else {
-    //     const phong = await Phong.create(req.body);
-    //     return res.json(phong);
-    // }
+    const { maphong } = req.body;
+    const phong = await Phong.findOne({
+        where: {
+            maphong,
+        },
+    });
+
+    if (phong) {
+        return res
+            .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
+            .send(
+                responseWithError(
+                    ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
+                    'Phong da ton tai',
+                ),
+            );
+    }
+
+    const phongMoi = await Phong.create({
+        ...req.body,
+        maphong,
+    });
+    return res.json(phongMoi);
 }
 
 async function updatePhongController(req, res) {
     const { id } = req.params;
-    const { maphong, dientich, dongia, loaiphong } = req.body;
+    const {
+        maphong, dientich, dongia, loaiphong,
+    } = req.body;
     const phong = await Phong.findOne({
         where: { id },
     });

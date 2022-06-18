@@ -15,7 +15,9 @@ async function createHDDichVuController(req, res) {
 
 async function updateHDDichVuController(req, res) {
     const { id } = req.params;
-    const { madv, tendv, dongia, mota } = req.body;
+    const {
+        madv, tendv, dongia, mota,
+    } = req.body;
     const hddichvu = await HDDichVu.findOne({
         where: { id },
     });
@@ -54,7 +56,7 @@ async function findHDDichVubyIDController(req, res) {
             );
     }
 
-    return res.json(dichvu);
+    return res.json(hddichvu);
 }
 
 async function deleteHDDichVubyIDController(req, res) {

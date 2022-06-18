@@ -9,14 +9,19 @@ async function getAllController(req, res) {
 }
 
 async function createKhachHangController(req, res) {
-    const khachhang = await KhachHang.create(req.body);
+    const khachhang = await KhachHang.create({
+        ...req.body,
+        cccd: req.body.cccd || null,
+        hochieu: req.body.hochieu || null,
+    });
     return res.json(khachhang);
 }
 
 async function updateKhachHangController(req, res) {
     const { id } = req.params;
-    const { makh, tenkh, diachi, dob, sdt, quoctich, hochieu, cccd, gender } =
-        req.body;
+    const {
+        makh, tenkh, diachi, dob, sdt, quoctich, hochieu, cccd, gender,
+    } = req.body;
     const khachhang = await KhachHang.findOne({
         where: { id },
     });

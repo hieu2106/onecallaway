@@ -35,11 +35,11 @@ const KhachHang = sequelize.define(
         },
         hochieu: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         cccd: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         gender: {
             type: DataTypes.STRING,

@@ -6,7 +6,9 @@ function validateGetAll(req, res, next) {
 }
 
 function createTienNghiMiddleware(req, res, next) {
-    const { matn, tentn, tinhtrang, slco } = req.body;
+    const {
+        matn, tentn, tinhtrang, slco,
+    } = req.body;
     if (!matn || !tentn || !tinhtrang || !slco) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
@@ -22,7 +24,9 @@ function createTienNghiMiddleware(req, res, next) {
 
 function updateTienNghiMiddleware(req, res, next) {
     const { id } = req.params;
-    const { matn, tentn, tinhtrang, slco } = req.body;
+    const {
+        matn, tentn, tinhtrang, slco,
+    } = req.body;
     if (!id || !matn || !tentn || !tinhtrang || !slco) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)

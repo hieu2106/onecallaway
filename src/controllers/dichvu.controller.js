@@ -15,7 +15,9 @@ async function createDichVuController(req, res) {
 
 async function updateDichVuController(req, res) {
     const { id } = req.params;
-    const { madv, tendv, dongia, mota } = req.body;
+    const {
+        madv, tendv, dongia, mota,
+    } = req.body;
     const dichvu = await DichVu.findOne({
         where: { id },
     });

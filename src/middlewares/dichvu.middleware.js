@@ -6,7 +6,9 @@ function validateGetAll(req, res, next) {
 }
 
 function createDichVuMiddleware(req, res, next) {
-    const { madv, tendv, dongia, mota } = req.body;
+    const {
+        madv, tendv, dongia, mota,
+    } = req.body;
     if (!madv || !tendv || !dongia || !mota) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
@@ -32,7 +34,9 @@ function createDichVuMiddleware(req, res, next) {
 
 function updateDichVuMiddleware(req, res, next) {
     const { id } = req.params;
-    const { madv, tendv, dongia, mota } = req.body;
+    const {
+        madv, tendv, dongia, mota,
+    } = req.body;
     if (!id || !madv || !tendv || !dongia || !mota) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
