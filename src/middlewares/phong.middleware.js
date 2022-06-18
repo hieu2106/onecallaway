@@ -6,7 +6,9 @@ function validateGetAll(req, res, next) {
 }
 
 function createPhongMiddleware(req, res, next) {
-    const { maphong, dientich, dongia, loaiphong } = req.body;
+    const {
+        maphong, dientich, dongia, loaiphong,
+    } = req.body;
     if (!maphong || !dientich || !dongia || !loaiphong) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
@@ -22,7 +24,9 @@ function createPhongMiddleware(req, res, next) {
 
 function updatePhongMiddleware(req, res, next) {
     const { id } = req.params;
-    const { maphong, dientich, dongia, loaiphong } = req.body;
+    const {
+        maphong, dientich, dongia, loaiphong,
+    } = req.body;
     if (!id || !maphong || !dientich || !dongia || !loaiphong) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
