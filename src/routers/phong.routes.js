@@ -8,6 +8,7 @@ const {
     findPhongByNameController,
     getPhongTrongController,
     thuePhongController,
+    getPhongDangThueController,
 } = require('../controllers/phong.controller');
 const {
     validateGetAll,
@@ -25,6 +26,8 @@ router.route('/').post(createPhongMiddleware, createPhongController);
 router.route('/:id').patch(updatePhongMiddleware, updatePhongController);
 
 router.route('/trong').get(getPhongTrongController);
+
+router.route('/dangthue').get(getPhongDangThueController);
 
 router.route('/search').get(findPhongByNameController);
 

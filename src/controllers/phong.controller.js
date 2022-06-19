@@ -42,9 +42,7 @@ async function createPhongController(req, res) {
 
 async function updatePhongController(req, res) {
     const { id } = req.params;
-    const {
-        maphong, dientich, dongia, loaiphong,
-    } = req.body;
+    const { maphong, dientich, dongia, loaiphong } = req.body;
     const phong = await Phong.findOne({
         where: { id },
     });
@@ -61,16 +59,18 @@ async function updatePhongController(req, res) {
     const phongtt = await Phong.findOne({
         where: {
             maphong,
+            id: {
+                [Op.not]: id,
+            },
         },
     });
-
     if (phongtt) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
                 responseWithError(
                     ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
-                    'Phong da ton tai',
+                    'Ma phong da ton tai',
                 ),
             );
     }
@@ -144,7 +144,7 @@ async function getPhongTrongController(req, res) {
     const phongTrongs = await Phong.findAll({
         where: {
             id: {
-                [Op.notIn]: phongDaThues.map((phong) => phong.idPhong),
+                [Op.notIn]: phongDaThues.map((phong) => phong.id),
             },
         },
     });
@@ -228,6 +228,34 @@ async function thuePhongController(req, res) {
     return res.json(phongThues);
 }
 
+async function getPhongDangThueController(req, res) {
+    const phongDangThue = await PhongThue.findAll({
+        where: {
+            phieutraId: {
+                [Op.is]: null,
+            },
+        },
+        attributes: ['id', 'giathue', 'ngayden', 'ngaydenhan'],
+        include: [
+            {
+                model: Phong,
+                attributes: ['maphong'],
+            },
+            {
+                model: PhieuThue,
+                include: [
+                    {
+                        model: KhachHang,
+                        attributes: ['makh', 'tenkh'],
+                    },
+                ],
+                attributes: ['id', 'tiencoc'],
+            },
+        ],
+    });
+    return res.json(phongDangThue);
+}
+
 module.exports = {
     getAllController,
     createPhongController,
@@ -237,4 +265,5 @@ module.exports = {
     findPhongByNameController,
     getPhongTrongController,
     thuePhongController,
+    getPhongDangThueController,
 };

@@ -108,7 +108,7 @@ function thuePhongMiddleware(req, res, next) {
                 ),
             );
     }
-    if (/^[0-9][0-9]+$/.test(tiencoc) === false) {
+    if (/^[1-9][0-9]+$/.test(tiencoc) === false) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
             .send(
