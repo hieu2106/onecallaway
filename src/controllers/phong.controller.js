@@ -7,6 +7,7 @@ const {
     PhieuTra,
     PhieuThue,
     KhachHang,
+    NhanVien,
 } = require('../models');
 
 async function getAllController(req, res) {
@@ -42,7 +43,9 @@ async function createPhongController(req, res) {
 
 async function updatePhongController(req, res) {
     const { id } = req.params;
-    const { maphong, dientich, dongia, loaiphong } = req.body;
+    const {
+        maphong, dientich, dongia, loaiphong,
+    } = req.body;
     const phong = await Phong.findOne({
         where: { id },
     });
@@ -229,6 +232,7 @@ async function thuePhongController(req, res) {
 }
 
 async function getPhongDangThueController(req, res) {
+    const { makh } = req.query;
     const phongDangThue = await PhongThue.findAll({
         where: {
             phieutraId: {
@@ -247,13 +251,67 @@ async function getPhongDangThueController(req, res) {
                     {
                         model: KhachHang,
                         attributes: ['makh', 'tenkh'],
+                        where: {
+                            makh: {
+                                [Op.like]: `%${makh || ''}%`,
+                            },
+                        },
                     },
                 ],
                 attributes: ['id', 'tiencoc'],
             },
         ],
     });
-    return res.json(phongDangThue);
+    return res.json(phongDangThue.filter((p) => p.phieuthue));
+}
+
+async function traPhongController(req, res) {
+    const { phongs, phieuthueId } = req.body;
+    const phongDangThue = await PhongThue.findAll({
+        where: {
+            phieuthueId,
+            id: {
+                [Op.in]: phongs,
+            },
+        },
+    });
+    if (phongDangThue.length !== phongs.length) {
+        return res
+            .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
+            .send(
+                responseWithError(
+                    ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
+                    'Phong khong ton tai',
+                ),
+            );
+    }
+    const phieuTra = await PhieuTra.create({
+        phieuthueId,
+        ngaytra: new Date(),
+    });
+    phieuTra.setPhongthues(phongDangThue);
+    return res.json(phieuTra);
+}
+
+async function getAllPhongDaTraController(req, res) {
+    const phongDaTra = await PhieuTra.findAll({
+        include: [
+            {
+                model: PhieuThue,
+                include: [
+                    {
+                        model: KhachHang,
+                        attributes: ['makh', 'tenkh'],
+                    },
+                    {
+                        model: NhanVien,
+                        attributes: ['id', 'name'],
+                    },
+                ],
+            },
+        ],
+    });
+    return res.json(phongDaTra);
 }
 
 module.exports = {
@@ -266,4 +324,6 @@ module.exports = {
     getPhongTrongController,
     thuePhongController,
     getPhongDangThueController,
+    traPhongController,
+    getAllPhongDaTraController,
 };

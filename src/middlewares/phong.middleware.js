@@ -121,6 +121,31 @@ function thuePhongMiddleware(req, res, next) {
     return next();
 }
 
+function traPhongMiddleware(req, res, next) {
+    const { phongs, phieuthueId } = req.body;
+    if (!phongs || !phieuthueId) {
+        return res
+            .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
+            .send(
+                responseWithError(
+                    ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
+                    'Invalid arguments',
+                ),
+            );
+    }
+    if (!Array.isArray(phongs) || phongs.length === 0) {
+        return res
+            .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)
+            .send(
+                responseWithError(
+                    ErrorCodes.ERROR_CODE_INVALID_PARAMETER,
+                    'Cần có ít nhất 1 phòng',
+                ),
+            );
+    }
+    return next();
+}
+
 module.exports = {
     validateGetAll,
     createPhongMiddleware,
@@ -129,4 +154,5 @@ module.exports = {
     deletePhongByIdMiddleware,
     findPhongByNameMiddleware,
     thuePhongMiddleware,
+    traPhongMiddleware,
 };

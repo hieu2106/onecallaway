@@ -9,6 +9,7 @@ const dichvusdRouter = require('./dichvusudung.routes');
 const hddichvuRouter = require('./hddichvu.routes');
 const tiennghiRouter = require('./tiennghi.routes');
 const tiennghiphongRouter = require('./tiennghiphong.routes');
+const hoadonRouter = require('./hoadon.routes');
 
 const router = Router();
 
@@ -26,5 +27,6 @@ router.use('/dichvusd', dichvusdRouter);
 router.use('/hddichvu', hddichvuRouter);
 router.use('/tiennghi', tiennghiRouter);
 router.use('/tiennghiphong', tiennghiphongRouter);
+router.use('/hoadon', authMiddleware, hoadonRouter);
 
 module.exports = router;

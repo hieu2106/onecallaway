@@ -99,6 +99,7 @@ async function findKhachHangByNameController(req, res) {
     console.log(khachhang);
     return res.json(khachhang);
 }
+
 module.exports = {
     getAllController,
     createKhachHangController,
