@@ -133,7 +133,6 @@ async function findPhongByNameController(req, res) {
             },
         },
     });
-    console.log(phong);
     return res.json(phong);
 }
 
@@ -147,7 +146,7 @@ async function getPhongTrongController(req, res) {
     const phongTrongs = await Phong.findAll({
         where: {
             id: {
-                [Op.notIn]: phongDaThues.map((phong) => phong.id),
+                [Op.notIn]: phongDaThues.map((phong) => phong.phongId),
             },
         },
     });
@@ -161,9 +160,7 @@ async function thuePhongController(req, res) {
     const [phongDangChoThue, phongAll, khachHang] = await Promise.all([
         PhongThue.findAll({
             where: {
-                phieutraId: {
-                    [Op.is]: null,
-                },
+                phieutraId: null,
                 phongId: {
                     [Op.in]: phongIds,
                 },
@@ -212,7 +209,6 @@ async function thuePhongController(req, res) {
                 ),
             );
     }
-    console.log(req.user);
     const nhanvienId = req.user.nhanvien.id;
     const phieuThue = await PhieuThue.create({
         khachhangId: khachHang.id,

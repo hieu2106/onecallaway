@@ -87,7 +87,6 @@ async function findTienNghiByNameController(req, res) {
             },
         },
     });
-    console.log(tiennghi);
     return res.json(tiennghi);
 }
 module.exports = {

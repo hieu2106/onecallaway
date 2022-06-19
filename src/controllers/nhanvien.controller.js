@@ -89,7 +89,6 @@ async function findNhanvienByNameController(req, res) {
             },
         },
     });
-    console.log(nhanvien);
     return res.json(nhanvien);
 }
 module.exports = {

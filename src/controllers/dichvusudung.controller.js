@@ -87,7 +87,6 @@ async function findDichVuSDByNameController(req, res) {
             },
         },
     });
-    console.log(dichvusd);
     return res.json(dichvusd);
 }
 module.exports = {

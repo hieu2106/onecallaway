@@ -87,7 +87,6 @@ async function findDichVuByNameController(req, res) {
             },
         },
     });
-    console.log(dichvu);
     return res.json(dichvu);
 }
 module.exports = {

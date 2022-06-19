@@ -54,7 +54,6 @@ async function refreshTokenController(req, res) {
     const { refreshToken } = req.body;
     try {
         const decoded = decodeToken(refreshToken, process.env.JWT_RF_SECRET);
-        console.log(decoded);
         const existed = await TaiKhoan.findOne({
             where: {
                 username: decoded.username,

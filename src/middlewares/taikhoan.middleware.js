@@ -24,7 +24,6 @@ function loginMiddleware(req, res, next) {
 
 function refreshTokenMiddleware(req, res, next) {
     const { refreshToken } = req.body;
-    console.log(req.body);
     if (!refreshToken) {
         return res
             .status(ErrorCodes.ERROR_CODE_INVALID_PARAMETER)

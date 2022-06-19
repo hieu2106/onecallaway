@@ -87,7 +87,6 @@ async function findHDDichVuByNameController(req, res) {
             },
         },
     });
-    console.log(hddichvu);
     return res.json(hddichvu);
 }
 module.exports = {
